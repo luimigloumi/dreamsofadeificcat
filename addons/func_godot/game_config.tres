@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TrenchBroomGameConfig" format=3 uid="uid://cg043qfxsgqp0"]
+
+[ext_resource type="Resource" uid="uid://b4xhdj0e16lop" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_clip.tres" id="1_41f75"]
+[ext_resource type="Resource" uid="uid://ca7377sfgj074" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_skip.tres" id="2_fk2wp"]
+[ext_resource type="Resource" uid="uid://bkjxc54mmdhbo" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_origin.tres" id="3_a005e"]
+[ext_resource type="Resource" uid="uid://2tt82lpacf4c" path="res://addons/func_godot/cat_fgd.tres" id="4_4836m"]
+[ext_resource type="Texture2D" uid="uid://decwujsyhj0qy" path="res://addons/func_godot/icon32.png" id="5_yh6yb"]
+[ext_resource type="Script" uid="uid://cx44c4vnq8bt5" path="res://addons/func_godot/src/trenchbroom/trenchbroom_game_config.gd" id="6_hucl4"]
+
+[resource]
+script = ExtResource("6_hucl4")
+game_name = "DreamsOfADeificCat"
+fgd_file = ExtResource("4_4836m")
