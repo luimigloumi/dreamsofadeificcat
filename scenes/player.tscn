@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dwjbxj133w7q"]
+
+[ext_resource type="Texture2D" uid="uid://coptyi5x8esrd" path="res://textures/test.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://porwoxuageop" path="res://Scripts/Player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://Scripts/SpringArmPivot.gd" id="2_g2els"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
+albedo_texture = ExtResource("1_3vyb7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dqkch"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1371874808]
+script = ExtResource("1_qhqgy")
+
+[node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=1736862708]
+mesh = SubResource("CapsuleMesh_g2els")
+surface_material_override/0 = SubResource("StandardMaterial3D_qhqgy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=404434453]
+shape = SubResource("CapsuleShape3D_dqkch")
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=1881753410]
+script = ExtResource("2_g2els")
+change_fov_on_run = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1347318918]
+spring_length = 2.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" unique_id=1834755026]

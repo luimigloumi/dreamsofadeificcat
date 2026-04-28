@@ -3,6 +3,19 @@
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_iyx0m"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_74lek"]
 [ext_resource type="Texture2D" uid="uid://coptyi5x8esrd" path="res://textures/test.png" id="3_j5jx5"]
+[ext_resource type="PackedScene" uid="uid://dwjbxj133w7q" path="res://scenes/player.tscn" id="4_74lek"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_74lek"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_j5jx5"]
+sky_material = SubResource("ProceduralSkyMaterial_74lek")
+
+[sub_resource type="Environment" id="Environment_lpvoh"]
+background_mode = 2
+sky = SubResource("Sky_j5jx5")
+tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpvoh"]
 albedo_texture = ExtResource("3_j5jx5")
@@ -45,6 +58,13 @@ local_map_file = "uid://c5ne400lllatv"
 map_settings = ExtResource("2_74lek")
 metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1500520814]
+environment = SubResource("Environment_lpvoh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=169306710]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="." unique_id=1129138217]
 collision_mask = 0
 
@@ -65,3 +85,6 @@ shape = SubResource("ConvexPolygonShape3D_ajshl")
 
 [node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="entity_0_worldspawn" unique_id=187579011]
 shape = SubResource("ConvexPolygonShape3D_ghpyy")
+
+[node name="Player" parent="." unique_id=439131432 instance=ExtResource("4_74lek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6033554, 1.5, 4.320739)
