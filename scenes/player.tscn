@@ -32,3 +32,9 @@ spring_length = 2.0
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" unique_id=1834755026]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpringArmPivot/SpringArm3D/Camera3D" unique_id=1825672957]
+light_color = Color(1, 0.7764706, 0.74509805, 1)
+light_energy = 7.337
+spot_range = 105.19331
+spot_angle = 38.805992
