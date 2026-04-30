@@ -12,7 +12,7 @@ func _ready() -> void:
 		fast_close = false
 	if fast_close:
 		print("** Fast Close enabled in the 'level.gd' script **")
-		print("** 'Esc' to close 'Shift + F1' to release mouse **")
+		print("** 'Esc' to close 'Tab' to release mouse **")
 	set_process_input(fast_close)
 
 

@@ -29,12 +29,8 @@ class_name PlayerAudios3D
 func _ready():
 	pass
 	character_controller.stepped.connect(_on_controller_stepped.bind())
-	character_controller.crouched.connect(_on_controller_crouched.bind())
 	character_controller.jumped.connect(_on_controller_jumped.bind())
 	character_controller.landed.connect(_on_controller_landed.bind())
-	character_controller.uncrouched.connect(_on_controller_uncrouched.bind())
-	character_controller.entered_the_water.connect(_on_controller_entered_the_water.bind())
-	character_controller.exit_the_water.connect(_on_controller_exit_the_water.bind())
 
 func _on_controller_jumped():
 	jump_stream.stream = audio_interact.jump_audio
@@ -61,9 +57,6 @@ func _get_audio_interact():
 	
 	
 func _get_audio_interact_of_object(collision):
-	if character_controller.is_on_water():
-		audio_interact = water_audio_interact
-		return
 	if !collision:
 		return
 	if not "physics_material_override" in collision:

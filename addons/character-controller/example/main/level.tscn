@@ -118,8 +118,9 @@ material_override = ExtResource("3_7vb8p")
 
 [node name="Player" parent="." unique_id=2014451178 instance=ExtResource("2_nvo2f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62268e-06, 6, 13)
+abilities_path = Array[NodePath]([NodePath("Crouch Ability 3D"), NodePath("Sprint Ability 3D"), NodePath("Walk Ability 3D"), NodePath("Jump Ability 3D"), NodePath("Fly Ability 3D"), NodePath("Swim Ability 3D")])
 
-[node name="Camera3D" type="Camera3D" parent="Player/Head/FirstPersonCameraReference" index="0" unique_id=878923128]
+[node name="Camera3D" type="Camera3D" parent="Player/Head/FirstPersonCameraReference" parent_id_path=PackedInt32Array(2014451178, 1098947509) index="0" unique_id=878923128]
 
 [node name="Area3D" parent="." unique_id=695364720 instance=ExtResource("3_ebamq")]
 transform = Transform3D(0.491574, 0, 0, 0, 1, 0, 0, 0, 0.555284, 0, -3, 5.93584)

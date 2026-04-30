@@ -125,7 +125,7 @@ func _do_head_bob(speed: float, delta: float) -> Vector3:
 
 	var tick_speed = (speed * delta) / step_interval
 	cycle_position_x += tick_speed
-	cycle_position_y += tick_speed * vertical_horizontal_ratio
+	cycle_position_y += tick_speed
 
 	if(cycle_position_x > 1):
 		cycle_position_x -= 1
