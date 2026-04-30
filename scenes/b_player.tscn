@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://v6q6fpc86x7s"]
+
+[ext_resource type="PackedScene" uid="uid://bgmjp8s4tacgk" path="res://Scripts/core/3p_controller.tscn" id="1_j4m3r"]
+[ext_resource type="Script" uid="uid://fo1iv3wuc6p3" path="res://Scripts/core/Bplayer.gd" id="2_0rbl3"]
+
+[node name="BPlayer" unique_id=374035645 instance=ExtResource("1_j4m3r")]
+script = ExtResource("2_0rbl3")
+input_back_action_name = "move_backward"
+input_forward_action_name = "move_forward"
+input_left_action_name = "move_left"
+input_right_action_name = "move_right"
+input_sprint_action_name = "move_sprint"
+input_jump_action_name = "move_jump"
+input_crouch_action_name = "move_crouch"
+input_fly_mode_action_name = "move_fly_mode"
+abilities_path = Array[NodePath]([NodePath("Walk Ability 3D"), NodePath("Sprint Ability 3D"), NodePath("Jump Ability 3D")])
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpringArmPivot" parent_id_path=PackedInt32Array(1282931387) index="1" unique_id=1374366945]
+spot_range = 15.37262
+spot_angle = 28.561075

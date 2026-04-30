@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8oy3xm2sff8"]
 
-[ext_resource type="PackedScene" uid="uid://ciu2qgckgu5sr" path="res://addons/character-controller/core/controller.tscn" id="1_cgsli"]
+[ext_resource type="PackedScene" uid="uid://ciu2qgckgu5sr" path="res://Scripts/core/controller.tscn" id="1_cgsli"]
 [ext_resource type="Script" uid="uid://dliglgfw3k3h7" path="res://Scripts/fps_controller_3d.gd" id="2_5t58n"]
 [ext_resource type="Script" uid="uid://b1vv7wqamups4" path="res://Scripts/head_movement_3d.gd" id="3_g5bw3"]
 [ext_resource type="Script" uid="uid://dj8mdvjk8fldy" path="res://addons/character-controller/fps/bob/head_bob.gd" id="4_hqdeu"]

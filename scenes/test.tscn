@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_iyx0m"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_74lek"]
-[ext_resource type="Material" uid="uid://bwojhcuioih53" path="res://textures/bricks.tres" id="3_74lek"]
-[ext_resource type="PackedScene" uid="uid://dwjbxj133w7q" path="res://scenes/player.tscn" id="4_74lek"]
+[ext_resource type="Material" path="res://textures/bricks.tres" id="3_74lek"]
+[ext_resource type="PackedScene" uid="uid://v6q6fpc86x7s" path="res://scenes/b_player.tscn" id="4_74lek"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_74lek"]
 _surfaces = [{
@@ -423,8 +423,8 @@ shape = SubResource("ConvexPolygonShape3D_3t5ks")
 [node name="entity_0_brush_63_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=2009590887]
 shape = SubResource("ConvexPolygonShape3D_elqqf")
 
-[node name="CharacterBody3D" parent="." unique_id=1371874808 instance=ExtResource("4_74lek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2212143, -5.3954268)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2041263074]
 environment = SubResource("Environment_74lek")
+
+[node name="BPlayer" parent="." unique_id=374035645 instance=ExtResource("4_74lek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.391477, 1.5, -5.5842414)

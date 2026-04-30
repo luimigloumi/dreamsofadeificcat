@@ -106,6 +106,11 @@ var _direction_base_node : Node3D
 ## Stores normal speed
 @onready var _normal_speed : float = speed
 
+@onready var player_mesh : Node3D = $Mesh
+@onready var spring_arm_pivot : Node3D = $SpringArmPivot
+@onready var spring_arm_3D : SpringArm3D = $SpringArmPivot/SpringArm3D
+@export var MAX_ZOOM_IN = 1
+@export var MAX_ZOOM_OUT = 7
 ## True if in the last frame it was on the ground
 var _last_is_on_floor := false
 
@@ -125,7 +130,16 @@ func setup():
 ## Moves the character controller.
 ## parameters are inputs that are sent to be handled by all abilities.
 func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false) -> void:
-	var direction = _direction_input(input_axis, _direction_base_node)
+	if Input.is_action_just_pressed("zoom_in"):
+		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*.8, MAX_ZOOM_IN, MAX_ZOOM_OUT)
+	if Input.is_action_just_pressed("zoom_out"):
+		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*1.2, MAX_ZOOM_IN, MAX_ZOOM_OUT)
+	var safe_direction = _direction_input(input_axis, _direction_base_node)
+	var direction : Vector3 = Vector3.ZERO
+	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
+	direction = direction.normalized()
 	_check_landed()
 	if not jump_ability.is_actived():
 		velocity.y -= gravity * _delta
@@ -195,7 +209,6 @@ func _check_step(_delta):
 	if _is_step(_horizontal_velocity.length(), is_on_floor(), _delta):
 		_step(is_on_floor())
 
-
 func _direction_input(input : Vector2, aim_node : Node3D) -> Vector3:
 	_direction = Vector3()
 	var aim = aim_node.get_global_transform().basis
@@ -210,6 +223,7 @@ func _direction_input(input : Vector2, aim_node : Node3D) -> Vector3:
 	else:
 		_direction.y = 0	
 	return _direction.normalized()
+
 
 
 func _step(is_on_floor:bool) -> bool:
