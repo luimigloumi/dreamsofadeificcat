@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2t6smyr8xtty"]
 
-[ext_resource type="Script" uid="uid://bmy13ib0322y" path="res://addons/character-controller/example/main/level.gd" id="1_cikgd"]
+[ext_resource type="Script" uid="uid://bmy13ib0322y" path="res://Scripts/core/level.gd" id="1_cikgd"]
 [ext_resource type="Material" uid="uid://2ciy11rdndma" path="res://addons/character-controller/example/main/materials/grass.tres" id="3_7vb8p"]
 [ext_resource type="PackedScene" uid="uid://b3wdcta6c4k4t" path="res://addons/character-controller/example/main/geometry/floor.tscn" id="3_80rlo"]
 [ext_resource type="PackedScene" uid="uid://dh7wg5y8ky5d8" path="res://addons/character-controller/example/main/water_area_3d.tscn" id="3_ebamq"]
@@ -463,3 +463,4 @@ directional_shadow_max_distance = 250.0
 
 [node name="BPlayer" parent="." unique_id=374035645 instance=ExtResource("12_frivk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.648451, 1, 5.7001133)
+input_dash_action_name = "move_dash"

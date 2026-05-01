@@ -6,24 +6,18 @@
 
 [node name="3P_Controller" unique_id=374035645 instance=ExtResource("1_2yn65")]
 script = ExtResource("2_m8gau")
-abilities_path = Array[NodePath]([])
 fov_change_speed = 4
 sprint_fov_multiplier = 1.1
-mouse_sensitivity = 2.0
 vertical_angle_limit = 90.0
-step_bob_enabled = true
-vertical_horizontal_ratio = 2
-jump_bob_enabled = true
-rotation_to_move = true
-speed_rotation = 4.0
-angle_limit_for_rotation = 0.1
+dash_strength = 25.0
+abilities_path = Array[NodePath]([])
 
-[node name="SpringArmPivot" type="Node3D" parent="." index="5" unique_id=1282931387]
+[node name="SpringArmPivot" type="Node3D" parent="." index="7" unique_id=1282931387]
 script = ExtResource("2_o8r26")
 change_fov_on_run = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" index="0" unique_id=820376595]
 spring_length = 2.0
-margin = 0.2
+margin = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0" unique_id=1298776637]

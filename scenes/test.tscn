@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://chgf85iisjj6a"]
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_iyx0m"]
+[ext_resource type="Script" uid="uid://bmy13ib0322y" path="res://Scripts/core/level.gd" id="1_j5jx5"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_74lek"]
 [ext_resource type="Material" path="res://textures/bricks.tres" id="3_74lek"]
 [ext_resource type="PackedScene" uid="uid://v6q6fpc86x7s" path="res://scenes/b_player.tscn" id="4_74lek"]
@@ -218,6 +219,7 @@ ambient_light_source = 2
 ambient_light_color = Color(0.14074025, 2.3199022e-05, 0.15220755, 1)
 
 [node name="Node3D" type="Node3D" unique_id=757640867]
+script = ExtResource("1_j5jx5")
 
 [node name="FuncGodotMap" type="Node3D" parent="." unique_id=534218124]
 script = ExtResource("1_iyx0m")
@@ -428,3 +430,17 @@ environment = SubResource("Environment_74lek")
 
 [node name="BPlayer" parent="." unique_id=374035645 instance=ExtResource("4_74lek")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.391477, 1.5, -5.5842414)
+input_dash_action_name = "move_dash"
+MAX_ZOOM_IN = 1
+MAX_ZOOM_OUT = 7
+fov_change_speed = 4
+sprint_fov_multiplier = 1.1
+vertical_angle_limit = 90.0
+gravity_multiplier = 3.0
+speed = 10.0
+acceleration = 8.0
+deceleration = 10.0
+air_control = 0.3
+sprint_speed_multiplier = 1.6
+step_lengthen = 0.7
+step_interval = 6.0

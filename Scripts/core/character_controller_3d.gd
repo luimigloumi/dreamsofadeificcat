@@ -15,6 +15,8 @@ signal landed
 ## Emitted when a jump is processed, is called when [JumpAbility3D] is active.
 signal jumped
 
+signal dashed
+
 ## Emitted when a sprint started, is called when [SprintAbility3D] is active.
 signal sprinted
 
@@ -62,6 +64,11 @@ signal sprinted
 ## Jump/Impulse height
 @export var jump_height : float = 10.0
 
+@export_group("Dash")
+
+@export var dash_strength : float = 10.0
+
+
 @export_group("Abilities")
 ## List of movement skills to be used in processing this class.
 @export var abilities_path: Array[NodePath]
@@ -103,14 +110,15 @@ var _direction_base_node : Node3D
 ## Simple ability that adds a vertical impulse when actived (Jump).
 @onready var jump_ability: JumpAbility3D = get_node(NodePath("Jump Ability 3D"))
 
+@onready var dash_ability: DashAbility3D = get_node(NodePath("Dash Ability 3D"))
+
 ## Stores normal speed
 @onready var _normal_speed : float = speed
 
 @onready var player_mesh : Node3D = $Mesh
 @onready var spring_arm_pivot : Node3D = $SpringArmPivot
 @onready var spring_arm_3D : SpringArm3D = $SpringArmPivot/SpringArm3D
-@export var MAX_ZOOM_IN = 1
-@export var MAX_ZOOM_OUT = 7
+
 ## True if in the last frame it was on the ground
 var _last_is_on_floor := false
 
@@ -130,11 +138,7 @@ func setup():
 
 ## Moves the character controller.
 ## parameters are inputs that are sent to be handled by all abilities.
-func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false) -> void:
-	if Input.is_action_just_pressed("zoom_in"):
-		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*.8, MAX_ZOOM_IN, MAX_ZOOM_OUT)
-	if Input.is_action_just_pressed("zoom_out"):
-		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*1.2, MAX_ZOOM_IN, MAX_ZOOM_OUT)
+func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false, input_dash := false) -> void:
 	var safe_direction = _direction_input(input_axis, _direction_base_node)
 	var direction : Vector3 = Vector3.ZERO
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -149,6 +153,7 @@ func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_
 	if input_jump and not doubleJumped and not head_check.is_colliding() and not is_on_floor():
 		jump_ability.set_active(true)
 		doubleJumped = true
+	dash_ability.set_active(input_dash)
 	walk_ability.set_active(true)
 	sprint_ability.set_active(input_sprint and is_on_floor() and  input_axis.y >= 0.5)
 	
@@ -192,6 +197,7 @@ func _load_nodes(nodePaths: Array) -> Array[MovementAbility3D]:
 func _connect_signals():
 	sprint_ability.actived.connect(_on_sprinted.bind())
 	jump_ability.actived.connect(_on_jumped.bind())
+	dash_ability.actived.connect(_on_dashed.bind())
 
 
 func _start_variables():
@@ -200,6 +206,7 @@ func _start_variables():
 	walk_ability.air_control = air_control
 	sprint_ability.speed_multiplier = sprint_speed_multiplier
 	jump_ability.height = jump_height
+	dash_ability.boost = dash_strength
 
 
 func _check_landed():
@@ -255,6 +262,8 @@ func _on_sprinted():
 func _on_jumped():
 	emit_signal("jumped")
 
+func _on_dashed():
+	emit_signal("dashed")
 
 func _on_landed():
 	emit_signal("landed")
