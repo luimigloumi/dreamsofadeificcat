@@ -117,6 +117,7 @@ var _last_is_on_floor := false
 ## Default controller height, affects collider
 var _default_height : float
 
+var doubleJumped := false
 
 ## Loads all character controller skills and sets necessary variables
 func setup():
@@ -145,6 +146,9 @@ func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_
 		velocity.y -= gravity * _delta
 	
 	jump_ability.set_active(input_jump and is_on_floor() and not head_check.is_colliding())
+	if input_jump and not doubleJumped and not head_check.is_colliding() and not is_on_floor():
+		jump_ability.set_active(true)
+		doubleJumped = true
 	walk_ability.set_active(true)
 	sprint_ability.set_active(input_sprint and is_on_floor() and  input_axis.y >= 0.5)
 	
@@ -254,3 +258,4 @@ func _on_jumped():
 
 func _on_landed():
 	emit_signal("landed")
+	doubleJumped = false
