@@ -11,7 +11,10 @@ albedo_texture = ExtResource("1_3vyb7")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dqkch"]
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qhqgy"]
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1371874808]
+collision_layer = 2
 script = ExtResource("1_qhqgy")
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
@@ -28,6 +31,7 @@ script = ExtResource("2_g2els")
 change_fov_on_run = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1347318918]
+shape = SubResource("SeparationRayShape3D_qhqgy")
 spring_length = 2.0
 margin = 0.2
 
