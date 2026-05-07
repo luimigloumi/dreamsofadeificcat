@@ -4,10 +4,10 @@ class_name WalkAbility3D
 ## Basic movement ability
 
 ## Time for the character to reach full speed
-@export var walkAccel := 2
-@export var runAccel := .2
+@export var walkAccel := 8
+@export var runAccel := 1
 @export var speedTransition := 10
-@export var speedMult := 3
+@export var speedMult := 2
 
 ## Time for the character to stop walking
 @export var deceleration := 10
@@ -26,11 +26,9 @@ func apply(velocity: Vector3, speed : float, is_on_floor : bool, direction : Vec
 	temp_vel.y = 0
 	
 	var temp_accel: float
-	
-	print(lastSpeed)
+
 	if direction.dot(temp_vel) > 0:
 		temp_accel = walkAccel
-		print(lastSpeed > speedTransition)
 		if (lastSpeed > speedTransition):
 			temp_accel = runAccel
 			speed *= speedMult

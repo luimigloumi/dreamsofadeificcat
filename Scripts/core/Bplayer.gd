@@ -49,7 +49,12 @@ func _physics_process(delta):
 	if is_valid_input:
 		var input_axis = Input.get_vector(input_left_action_name, input_right_action_name, input_back_action_name, input_forward_action_name)
 		var input_jump = Input.is_action_just_pressed(input_jump_action_name)
-		var input_sprint = Input.is_action_pressed(input_sprint_action_name)
+		var input_sprint = currentSpeed > 15
+		if input_sprint:
+			Input.action_press("run")
+		else:
+			Input.action_release("run")
+		print(currentSpeed)
 		var input_dash = Input.is_action_just_pressed(input_dash_action_name)
 		move(delta, currentSpeed, input_axis, input_jump, input_sprint, input_dash)
 	else:
