@@ -4,16 +4,19 @@ class_name DashAbility3D
 ## Simple ability that adds a vertical impulse when actived (Jump)
 
 ## Jump/Impulse height
-@export var boost := 10
+@export var boost := 4
 
 
 ## Change vertical velocity of [CharacterController3D]
 func apply(velocity : Vector3, speed : float, is_on_floor : bool, direction : Vector3, _delta : float, lastSpeed : float) -> Vector3:
 	if is_actived():
 		var temp_dir := direction
+		var flat_velocity = Vector3(velocity.x, 0, velocity.z)
+		var cur_magnitude = flat_velocity.length()
+
 		temp_dir.y = 0
-		temp_dir = temp_dir.normalized() * boost
+		temp_dir = temp_dir.normalized() * (cur_magnitude + boost)
 		
-		velocity += temp_dir
+		velocity = temp_dir
 		velocity.y = 10
 	return velocity

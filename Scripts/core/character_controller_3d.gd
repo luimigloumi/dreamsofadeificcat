@@ -31,17 +31,7 @@ signal sprinted
 ## Note: this speed is used as a basis for abilities to multiply their 
 ## respective values, changing it will have consequences on [b]all abilities[/b]
 ## that use velocity.
-@export var speed : float = 10.0
-
-## Time for the character to reach full speed
-@export var acceleration : float = 8.0
-
-## Time for the character to stop walking
-@export var deceleration : float = 10.0
-
-## Sets control in the air
-@export var air_control : float = 0.3
-
+var speed : float = 1.0
 
 @export_group("Sprint")
 
@@ -201,9 +191,6 @@ func _connect_signals():
 
 
 func _start_variables():
-	walk_ability.walkAccel = acceleration
-	walk_ability.deceleration = deceleration
-	walk_ability.air_control = air_control
 	sprint_ability.speed_multiplier = sprint_speed_multiplier
 	jump_ability.height = jump_height
 	dash_ability.boost = dash_strength

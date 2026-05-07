@@ -20,6 +20,14 @@ jump_height = 15.0
 dash_strength = 40.0
 abilities_path = Array[NodePath]([NodePath("Walk Ability 3D"), NodePath("Sprint Ability 3D"), NodePath("Jump Ability 3D"), NodePath("Dash Ability 3D")])
 
+[node name="Walk Ability 3D" parent="." index="2" unique_id=1290676943]
+walk_acceleration = 30.0
+run_acceleration = 5.0
+deceleration = 60.0
+
+[node name="Dash Ability 3D" parent="." index="5" unique_id=1489192302]
+boost = 4
+
 [node name="SpotLight3D" type="SpotLight3D" parent="SpringArmPivot" parent_id_path=PackedInt32Array(1282931387) index="1" unique_id=1374366945]
 spot_range = 15.37262
 spot_angle = 28.561075
