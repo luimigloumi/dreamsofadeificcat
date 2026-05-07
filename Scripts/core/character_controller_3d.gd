@@ -138,7 +138,7 @@ func setup():
 
 ## Moves the character controller.
 ## parameters are inputs that are sent to be handled by all abilities.
-func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false, input_dash := false) -> void:
+func move(_delta: float, currentSpeed: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false, input_dash := false) -> void:
 	var safe_direction = _direction_input(input_axis, _direction_base_node)
 	var direction : Vector3 = Vector3.ZERO
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -163,7 +163,7 @@ func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_
 	speed = _normal_speed * multiplier
 	
 	for ability in _abilities:
-		velocity = ability.apply(velocity, speed, is_on_floor(), direction, _delta)
+		velocity = ability.apply(velocity, speed, is_on_floor(), direction, _delta, currentSpeed)
 	
 	move_and_slide()
 	_horizontal_velocity = Vector3(velocity.x, 0.0, velocity.z)
@@ -201,7 +201,7 @@ func _connect_signals():
 
 
 func _start_variables():
-	walk_ability.acceleration = acceleration
+	walk_ability.walkAccel = acceleration
 	walk_ability.deceleration = deceleration
 	walk_ability.air_control = air_control
 	sprint_ability.speed_multiplier = sprint_speed_multiplier

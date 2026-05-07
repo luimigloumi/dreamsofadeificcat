@@ -47,8 +47,8 @@ func setup():
 ## based on whether swim or fly mode is active.
 ## Afterwards, the [b]move()[/b] of the base class [CharacterMovement3D] is called
 ## It is then called functions responsible for head bob if necessary.
-func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false, input_dash := false):
-	super.move(_delta, input_axis, input_jump, input_sprint, input_dash)
+func move(_delta: float, currentSpeed = 0.0, input_axis := Vector2.ZERO, input_jump := false, input_sprint := false, input_dash := false):
+	super.move(_delta, currentSpeed, input_axis, input_jump, input_sprint, input_dash)
 
 
 

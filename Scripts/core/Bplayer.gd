@@ -25,10 +25,16 @@ class_name BPlayer
 @export var MAX_ZOOM_IN = 1
 @export var MAX_ZOOM_OUT = 7
 
+var horizontalVelocity : Vector3
+var lastPos : Vector3
+var currentPos : Vector3
+var currentSpeed
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	setup()
+	lastPos = Vector3(position.x, 0, position.z)
+	currentPos = lastPos
 
 
 func _physics_process(delta):
@@ -37,12 +43,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("zoom_out"):
 		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*1.2, MAX_ZOOM_IN, MAX_ZOOM_OUT)
 	var is_valid_input := Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	lastPos = currentPos
+	currentPos = Vector3(position.x, 0, position.z)
+	currentSpeed = (currentPos-lastPos).length()/delta
 	if is_valid_input:
 		var input_axis = Input.get_vector(input_left_action_name, input_right_action_name, input_back_action_name, input_forward_action_name)
 		var input_jump = Input.is_action_just_pressed(input_jump_action_name)
 		var input_sprint = Input.is_action_pressed(input_sprint_action_name)
 		var input_dash = Input.is_action_just_pressed(input_dash_action_name)
-		move(delta, input_axis, input_jump, input_sprint, input_dash)
+		move(delta, currentSpeed, input_axis, input_jump, input_sprint, input_dash)
 	else:
 		# NOTE: It is important to always call move() even if we have no inputs 
 		## to process, as we still need to calculate gravity and collisions.

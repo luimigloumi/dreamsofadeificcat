@@ -39,5 +39,5 @@ func set_active(a : bool) -> void:
 
 ## Change current velocity of [CharacterController3D].
 ## In this function abilities can change the way the character controller behaves based on speeds and other parameters received.
-func apply(velocity : Vector3, speed : float, is_on_floor : bool, direction : Vector3, _delta : float) -> Vector3:
+func apply(velocity : Vector3, speed : float, is_on_floor : bool, direction : Vector3, _delta : float, lastSpeed : float) -> Vector3:
 	return velocity

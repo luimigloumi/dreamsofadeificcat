@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5xa7uyymwaev"
-path="res://.godot/imported/mdl_plate.blend-617052b861710fe6da7e482c5b637784.scn"
+uid="uid://cm3rr8lu2ibly"
+path="res://.godot/imported/mdl_dreamcatcher.blend-fec91d1098f43a40a127645ca9d6848b.scn"
 
 [deps]
 
-source_file="res://assets/models/mdl_plate.blend"
-dest_files=["res://.godot/imported/mdl_plate.blend-617052b861710fe6da7e482c5b637784.scn"]
+source_file="res://assets/models/mdl_dreamcatcher.blend"
+dest_files=["res://.godot/imported/mdl_dreamcatcher.blend-fec91d1098f43a40a127645ca9d6848b.scn"]
 
 [params]
 

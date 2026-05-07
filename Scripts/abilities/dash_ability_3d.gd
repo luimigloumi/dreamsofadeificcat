@@ -8,7 +8,7 @@ class_name DashAbility3D
 
 
 ## Change vertical velocity of [CharacterController3D]
-func apply(velocity : Vector3, speed : float, is_on_floor : bool, direction : Vector3, _delta : float) -> Vector3:
+func apply(velocity : Vector3, speed : float, is_on_floor : bool, direction : Vector3, _delta : float, lastSpeed : float) -> Vector3:
 	if is_actived():
 		var temp_dir := direction
 		temp_dir.y = 0
