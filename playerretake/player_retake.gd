@@ -43,8 +43,8 @@ var camera_rotator : Node3D
 @export var dive_boost = 1.0
 @export var dive_bump = 5.0
 
-@export var MAX_ZOOM_IN = 1
-@export var MAX_ZOOM_OUT = 7
+@export var MAX_ZOOM_IN = 3
+@export var MAX_ZOOM_OUT = 10
 @onready var spring_arm_3D = $SpringArmPivot/SpringArm3D
 
 var direction = Vector3.FORWARD
