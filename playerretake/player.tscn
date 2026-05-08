@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdfc0reo1q4pu" path="res://playerretake/player_retake.gd" id="1_2xyxb"]
 [ext_resource type="Texture2D" uid="uid://coptyi5x8esrd" path="res://textures/test.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://Scripts/SpringArmPivot.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://dl3lw5pld1tl" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
 
@@ -13,14 +14,56 @@ albedo_texture = ExtResource("1_3vyb7")
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qhqgy"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_40cgn"]
+margin = 0.0
+size = Vector3(0.5, 0.5, 0.05)
+
+[sub_resource type="Gradient" id="Gradient_40cgn"]
+offsets = PackedFloat32Array(0, 0.60982656, 0.66184974, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.06476684, 0.06476684, 0.06476684, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnxpk"]
+gradient = SubResource("Gradient_40cgn")
+fill = 1
+fill_from = Vector2(0.507326, 0.492674)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnxpk"]
+transparency = 2
+alpha_scissor_threshold = 0.595
+alpha_antialiasing_mode = 0
+cull_mode = 1
+albedo_texture = SubResource("GradientTexture2D_bnxpk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5jq2p"]
+material = SubResource("StandardMaterial3D_bnxpk")
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1371874808]
 collision_layer = 2
 script = ExtResource("1_2xyxb")
 p_camera_rotator = NodePath("SpringArmPivot")
+run_speed = 30.0
+max_speed = 50.0
+exceed_speed = 70.0
+walk_acceleration = 30.0
+deceleration = 10.0
+skid_deceleration = 50.0
+turn_deceleration = 2.5
+air_control_mult = 0.2
+jump_mult = 2.0
+fall_mult = 3.0
+walk_turn_speed = 14.0
+run_turn_speed = 4.0
+dive_boost = 5.0
+dive_bump = 7.5
+jump_force = 10.0
+jump_buffer = 0.15
+coyote_buffer = 0.2
+dive_buffer = 0.15
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=1736862708]
+layers = 2
 mesh = SubResource("CapsuleMesh_g2els")
 surface_material_override/0 = SubResource("StandardMaterial3D_qhqgy")
 
@@ -32,7 +75,7 @@ script = ExtResource("2_g2els")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1347318918]
 shape = SubResource("SeparationRayShape3D_qhqgy")
-spring_length = 2.0
+spring_length = 8.0
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" unique_id=1834755026]
@@ -42,3 +85,46 @@ light_color = Color(1, 0.7764706, 0.74509805, 1)
 light_energy = 7.337
 spot_range = 105.19331
 spot_angle = 38.805992
+
+[node name="DebugUI" type="Control" parent="." unique_id=195500603]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="speed" type="Label" parent="DebugUI" unique_id=1649927108]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 3.0
+offset_right = 58.0
+offset_bottom = 26.0
+text = "SPEED"
+script = ExtResource("4_40cgn")
+p_target = NodePath("../..")
+variable = "speed"
+prefix = "speed: "
+suffix = " m/s"
+
+[node name="speed" type="Label" parent="DebugUI/speed" unique_id=436705009]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 51.0
+offset_bottom = 40.0
+text = "VELOCITY"
+script = ExtResource("4_40cgn")
+p_target = NodePath("../../..")
+variable = "velocity"
+prefix = "velocity: "
+suffix = ""
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=446526174]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.8142735, 0)
+shape = SubResource("BoxShape3D_40cgn")
+spring_length = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpringArm3D" unique_id=184953887]
+mesh = SubResource("QuadMesh_5jq2p")
