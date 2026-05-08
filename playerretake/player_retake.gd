@@ -33,6 +33,7 @@ var camera_rotator : Node3D
 @export var turn_deceleration = 0.3
 
 @export var air_control_mult = 0.4
+@export var air_turn_mult = 0.6
 
 @export var jump_mult = 3.0
 @export var fall_mult = 6.0
@@ -86,6 +87,12 @@ func get_accel_mult() -> float:
 	if is_on_floor():
 		return 1.0
 	return air_control_mult
+
+func get_turn_mult() -> float:
+	if is_on_floor():
+		return 1.0
+	return air_turn_mult
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -162,7 +169,7 @@ func apply_walk(veloc: Vector3, delta: float) -> Vector3:
 		speed = move_toward(speed, 0, skid_deceleration * delta)
 	else:
 		var angle_sign = sign(direction.signed_angle_to(move_direction, Vector3.UP))
-		direction = direction.rotated(Vector3.UP, min(abs(direction.signed_angle_to(move_direction, Vector3.UP)), get_turn_speed() * delta) * angle_sign)
+		direction = direction.rotated(Vector3.UP, min(abs(direction.signed_angle_to(move_direction, Vector3.UP)), get_turn_speed() * get_turn_mult() * delta) * angle_sign)
 
 	return veloc 
 
