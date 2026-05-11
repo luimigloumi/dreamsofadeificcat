@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bowxjyooeey6i"
-valid=false
+path="res://.godot/imported/mdl_thepoweroftwo.blend-1fbbab2be17340df2edbb6d92c73b854.scn"
 
 [deps]
 
 source_file="res://assets/models/mdl_thepoweroftwo.blend"
+dest_files=["res://.godot/imported/mdl_thepoweroftwo.blend-1fbbab2be17340df2edbb6d92c73b854.scn"]
 
 [params]
 
