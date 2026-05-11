@@ -196,7 +196,10 @@ func apply_dive(veloc: Vector3) -> Vector3:
 		has_dived = true
 		dive_flag = 0.0
 		veloc.y = dive_bump
-		speed += dive_boost
+		if speed < run_speed*.75:
+			speed = run_speed*.75
+		else:
+			speed += dive_boost
 		var movement = get_movement_vector()
 		if movement == Vector3.ZERO:
 			movement = get_direction_vector().rotated(Vector3(0,1,0),PI/2)
