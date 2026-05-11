@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bdfc0reo1q4pu" path="res://playerretake/player_retake.gd" id="1_2xyxb"]
 [ext_resource type="Texture2D" uid="uid://coptyi5x8esrd" path="res://textures/test.png" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://Scripts/SpringArmPivot.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://playerretake/SpringArmPivot.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://dl3lw5pld1tl" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
@@ -53,7 +53,6 @@ jump_mult = 2.0
 fall_mult = 3.0
 walk_turn_speed = 14.0
 run_turn_speed = 4.0
-dive_boost = 5.0
 dive_bump = 7.5
 jump_force = 10.0
 jump_buffer = 0.15

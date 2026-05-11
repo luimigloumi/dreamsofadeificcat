@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://chgf85iisjj6a"]
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_iyx0m"]
-[ext_resource type="Script" uid="uid://bmy13ib0322y" path="res://Scripts/core/level.gd" id="1_j5jx5"]
+[ext_resource type="Script" uid="uid://bmy13ib0322y" path="res://playerretake/level.gd" id="1_j5jx5"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_74lek"]
-[ext_resource type="Material" uid="uid://bwojhcuioih53" path="res://textures/bricks.tres" id="3_74lek"]
+[ext_resource type="Material" path="res://textures/bricks.tres" id="3_74lek"]
 [ext_resource type="PackedScene" uid="uid://dwjbxj133w7q" path="res://playerretake/player.tscn" id="5_j5jx5"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j5jx5"]
@@ -231,6 +231,7 @@ metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 collision_mask = 0
 
 [node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=961752713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0066125393, -0.03181386, -0.014599323)
 mesh = SubResource("ArrayMesh_j5jx5")
 
 [node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=2086832577]

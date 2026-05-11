@@ -42,7 +42,7 @@ var camera_rotator : Node3D
 @export var walk_turn_speed = 9.0
 @export var run_turn_speed = 9.0
 
-@export var dive_boost = 1.0
+@export var dive_boost = 5.0
 @export var dive_bump = 5.0
 @export var dash_boost = 2.0
 
