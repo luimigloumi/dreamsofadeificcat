@@ -10,7 +10,8 @@ extends CharacterBody3D
 @export var input_jump_action_name := "move_jump"
 @export var input_crouch_action_name := "move_crouch"
 @export var input_debug_display_action_name := "debug_display"
-@export var input_dive_action_name := "move_dash"
+@export var input_dive_action_name := "move_dive"
+@export var input_dash_action_name := "move_dash"
 
 @export_category("main")
 
@@ -43,6 +44,7 @@ var camera_rotator : Node3D
 
 @export var dive_boost = 1.0
 @export var dive_bump = 5.0
+@export var dash_boost = 2.0
 
 @export var MAX_ZOOM_IN = 3
 @export var MAX_ZOOM_OUT = 10
@@ -62,6 +64,9 @@ var has_dived = false
 @export var dive_buffer = 0.3
 var dive_flag = 0.0
 var dJump_flag = false
+var dash_flag = false
+var has_dashed = false
+var dash_timer = 0.2
 
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
@@ -113,6 +118,9 @@ func _process(delta: float) -> void:
 	#these two ensure that jumping and diving doesn't not work if you're slightly too early!
 	if Input.is_action_just_pressed(input_dive_action_name):
 		dive_flag = dive_buffer
+	if Input.is_action_just_pressed(input_dash_action_name) && !has_dashed:
+		dash_flag = true
+		has_dashed = true
 	if Input.is_action_just_pressed(input_jump_action_name):
 		jump_flag = jump_buffer
 	if Input.is_action_just_pressed("zoom_in"):
@@ -128,11 +136,13 @@ func _physics_process(delta: float) -> void:
 		#ensures that jumping doesn't not work if you're slightly too late
 		coyote_flag = coyote_buffer
 		dJump_flag = false
+		has_dashed = false
 
 	velocity = apply_gravity(velocity, delta)
-	velocity = apply_jump(velocity)
 	velocity = apply_walk(velocity, delta)
+	velocity = apply_jump(velocity)
 	velocity = apply_dive(velocity)
+	velocity = apply_dash(velocity)
 
 	var result = direction * speed
 	result.y = velocity.y
@@ -144,7 +154,10 @@ func _physics_process(delta: float) -> void:
 	speed = clamp(speed, 0, velocity.length())
 
 func apply_gravity(veloc: Vector3, delta: float) -> Vector3:
-	veloc.y -= 9.8 * delta * get_gravity_mult()
+	if (dash_timer > 0.0):
+		dash_timer -= delta
+	else:
+		veloc.y -= 9.8 * delta * get_gravity_mult()
 	return veloc
 
 func apply_walk(veloc: Vector3, delta: float) -> Vector3:
@@ -200,7 +213,22 @@ func apply_jump(veloc: Vector3) -> Vector3:
 		veloc.y = jump_force
 	elif jump_flag > 0 && !dJump_flag:
 		dJump_flag = true
-		veloc.y = jump_force * 1.5
+		jumping = true
+		veloc.y = jump_force
 	if veloc.y < 0 or !Input.is_action_pressed(input_jump_action_name):
 		jumping = false
+	return veloc
+	
+func apply_dash(veloc: Vector3) -> Vector3:
+	if dash_flag:
+		dash_flag = false
+		dash_timer = 0.2
+		veloc.y = 0
+		speed += dash_boost
+		var movement = get_movement_vector()
+		if movement == Vector3.ZERO:
+			movement = get_direction_vector().rotated(Vector3(0,1,0),PI/2)
+			speed = run_speed*.75
+		var move_direction = movement.normalized()
+		direction = move_direction
 	return veloc
