@@ -17,6 +17,7 @@ extends CharacterBody3D
 
 @export var p_camera_rotator : NodePath
 var camera_rotator : Node3D
+@onready var spring_arm : SpringArm3D = $SpringArm3D
 
 @onready var debug_display = $"DebugUI"
 
@@ -74,6 +75,7 @@ func get_movement_vector() -> Vector3:
 	
 func get_direction_vector() -> Vector3:
 	return camera_rotator.global_basis.x
+	
 
 func get_desired_speed() -> float:
 	if speed < walk_speed:
@@ -108,7 +110,7 @@ func _ready() -> void:
 	camera_rotator  = get_node(p_camera_rotator)
 
 func _process(delta: float) -> void:
-
+	print(spring_arm_3D)
 	dive_flag = max(0.0, dive_flag - delta)
 	jump_flag = max(0.0, jump_flag - delta)
 	coyote_flag = max(0.0, coyote_flag - delta)
