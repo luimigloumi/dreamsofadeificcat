@@ -51,7 +51,7 @@ var camera_rotator : Node3D
 var direction = Vector3.FORWARD
 var speed = 0.0
 
-@export var jump_force = 20.0
+@export var jump_force = 40.0
 var jump_flag = 0.0
 var coyote_flag = 0.0
 @export var jump_buffer = 0.3
@@ -61,6 +61,7 @@ var jumping = false
 var has_dived = false
 @export var dive_buffer = 0.3
 var dive_flag = 0.0
+var dJump_flag = false
 
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
@@ -126,13 +127,12 @@ func _physics_process(delta: float) -> void:
 		has_dived = false
 		#ensures that jumping doesn't not work if you're slightly too late
 		coyote_flag = coyote_buffer
+		dJump_flag = false
 
 	velocity = apply_gravity(velocity, delta)
-	velocity = apply_jump(velocity, delta)
+	velocity = apply_jump(velocity)
 	velocity = apply_walk(velocity, delta)
-	print(velocity)
-	velocity = apply_dive(velocity, delta)
-	print(velocity)
+	velocity = apply_dive(velocity)
 
 	var result = direction * speed
 	result.y = velocity.y
@@ -178,7 +178,7 @@ func apply_walk(veloc: Vector3, delta: float) -> Vector3:
 
 	return veloc 
 
-func apply_dive(veloc: Vector3, delta: float) -> Vector3:
+func apply_dive(veloc: Vector3) -> Vector3:
 	if dive_flag > 0.0 && !has_dived:
 		has_dived = true
 		dive_flag = 0.0
@@ -187,17 +187,20 @@ func apply_dive(veloc: Vector3, delta: float) -> Vector3:
 		var movement = get_movement_vector()
 		if movement == Vector3.ZERO:
 			movement = get_direction_vector().rotated(Vector3(0,1,0),PI/2)
-			speed = run_speed/2
+			speed = run_speed*.75
 		var move_direction = movement.normalized()
 		direction = move_direction
 	return veloc
 
-func apply_jump(veloc: Vector3, delta: float) -> Vector3:
+func apply_jump(veloc: Vector3) -> Vector3:
 	if jump_flag > 0 && coyote_flag > 0:
 		jump_flag = 0
 		coyote_flag = 0
 		jumping = true
 		veloc.y = jump_force
+	elif jump_flag > 0 && !dJump_flag:
+		dJump_flag = true
+		veloc.y = jump_force * 1.5
 	if veloc.y < 0 or !Input.is_action_pressed(input_jump_action_name):
 		jumping = false
 	return veloc
