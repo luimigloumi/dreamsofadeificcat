@@ -224,7 +224,10 @@ func apply_dash(veloc: Vector3) -> Vector3:
 		dash_flag = false
 		dash_timer = 0.2
 		veloc.y = 0
-		speed += dash_boost
+		if speed < run_speed*.75:
+			speed = run_speed*.75
+		else:
+			speed += dash_boost
 		var movement = get_movement_vector()
 		if movement == Vector3.ZERO:
 			movement = get_direction_vector().rotated(Vector3(0,1,0),PI/2)
