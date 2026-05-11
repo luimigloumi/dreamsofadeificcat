@@ -65,6 +65,9 @@ var dive_flag = 0.0
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
 	return camera_rotator.global_basis.x * movement.x + camera_rotator.global_basis.z * movement.y
+	
+func get_direction_vector() -> Vector3:
+	return camera_rotator.global_basis.x
 
 func get_desired_speed() -> float:
 	if speed < walk_speed:
@@ -126,8 +129,10 @@ func _physics_process(delta: float) -> void:
 
 	velocity = apply_gravity(velocity, delta)
 	velocity = apply_jump(velocity, delta)
-	velocity = apply_dive(velocity, delta)
 	velocity = apply_walk(velocity, delta)
+	print(velocity)
+	velocity = apply_dive(velocity, delta)
+	print(velocity)
 
 	var result = direction * speed
 	result.y = velocity.y
@@ -180,6 +185,9 @@ func apply_dive(veloc: Vector3, delta: float) -> Vector3:
 		veloc.y = dive_bump
 		speed += dive_boost
 		var movement = get_movement_vector()
+		if movement == Vector3.ZERO:
+			movement = get_direction_vector().rotated(Vector3(0,1,0),PI/2)
+			speed = run_speed/2
 		var move_direction = movement.normalized()
 		direction = move_direction
 	return veloc
