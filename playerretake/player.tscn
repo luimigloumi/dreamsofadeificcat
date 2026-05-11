@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdfc0reo1q4pu" path="res://playerretake/player_retake.gd" id="1_2xyxb"]
 [ext_resource type="Texture2D" uid="uid://coptyi5x8esrd" path="res://textures/test.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://playerretake/SpringArmPivot.gd" id="2_g2els"]
-[ext_resource type="Script" uid="uid://dl3lw5pld1tl" path="res://playerretake/debug_label.gd" id="4_40cgn"]
+[ext_resource type="Script" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
 
@@ -41,6 +41,7 @@ material = SubResource("StandardMaterial3D_bnxpk")
 collision_layer = 2
 script = ExtResource("1_2xyxb")
 p_camera_rotator = NodePath("SpringArmPivot")
+walk_speed = 15.0
 run_speed = 30.0
 max_speed = 50.0
 exceed_speed = 70.0

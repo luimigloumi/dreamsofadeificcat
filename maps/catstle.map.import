@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://hnep563pwuv7"
+path="res://.godot/imported/catstle.map-d8ccc7098bce674c580e85168d88ca67.tres"
+
+[deps]
+
+source_file="res://maps/catstle.map"
+dest_files=["res://.godot/imported/catstle.map-d8ccc7098bce674c580e85168d88ca67.tres"]
+
+[params]
+
