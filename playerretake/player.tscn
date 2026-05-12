@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://playerretake/SpringArmPivot.gd" id="2_g2els"]
 [ext_resource type="Script" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_40cgn"]
+points = PackedVector3Array(0, 0, 0, 1.5, -0.2, -2, 1.5, 0.2, -2, -1.5, 0.2, -2, -1.5, -0.2, -2)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
@@ -41,6 +44,8 @@ material = SubResource("StandardMaterial3D_bnxpk")
 collision_layer = 2
 script = ExtResource("1_2xyxb")
 p_camera_rotator = NodePath("SpringArmPivot")
+p_swipe_area = NodePath("Directional/Area3D")
+p_directional = NodePath("Directional")
 walk_speed = 15.0
 run_speed = 30.0
 max_speed = 50.0
@@ -59,6 +64,16 @@ jump_force = 10.0
 jump_buffer = 0.15
 coyote_buffer = 0.2
 dive_buffer = 0.15
+
+[node name="Directional" type="Node3D" parent="." unique_id=1303523961]
+
+[node name="Area3D" type="Area3D" parent="Directional" unique_id=1173147281]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Directional/Area3D" unique_id=858097187]
+shape = SubResource("ConvexPolygonShape3D_40cgn")
+debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
 

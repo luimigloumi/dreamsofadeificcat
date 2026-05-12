@@ -12,12 +12,17 @@ extends CharacterBody3D
 @export var input_debug_display_action_name := "debug_display"
 @export var input_dive_action_name := "move_dive"
 @export var input_dash_action_name := "move_dash"
+@export var input_swipe_action_name := "swipe"
 
 @export_category("main")
 
 @export var p_camera_rotator : NodePath
 var camera_rotator : Node3D
 @onready var spring_arm : SpringArm3D = $SpringArm3D
+@export var p_swipe_area : NodePath
+var swipe_area : Area3D
+@export var p_directional : NodePath
+var directional : Node3D
 
 @onready var debug_display = $"DebugUI"
 
@@ -69,6 +74,11 @@ var dash_flag = false
 var has_dashed = false
 var dash_timer = 0.2
 
+@export var swipe_buffer = 0.3
+var swipe_flag = 0.0
+var swipe_timer = 0.0
+@export var swipe_cooldown = 0.5
+
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
 	return camera_rotator.global_basis.x * movement.x + camera_rotator.global_basis.z * movement.y
@@ -108,12 +118,15 @@ func get_turn_mult() -> float:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera_rotator  = get_node(p_camera_rotator)
+	swipe_area = get_node(p_swipe_area)
+	directional = get_node(p_directional)
 
 func _process(delta: float) -> void:
-	print(spring_arm_3D)
 	dive_flag = max(0.0, dive_flag - delta)
 	jump_flag = max(0.0, jump_flag - delta)
 	coyote_flag = max(0.0, coyote_flag - delta)
+	swipe_flag = max(0.0, swipe_flag - delta)
+	swipe_timer = max(0.0, swipe_timer - delta)
 
 	if Input.is_action_just_pressed(input_debug_display_action_name):
 		debug_display.visible = !debug_display.visible
@@ -129,6 +142,8 @@ func _process(delta: float) -> void:
 		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*.8, MAX_ZOOM_IN, MAX_ZOOM_OUT)
 	if Input.is_action_just_pressed("zoom_out"):
 		spring_arm_3D.spring_length = clampf(spring_arm_3D.spring_length*1.2, MAX_ZOOM_IN, MAX_ZOOM_OUT)
+	if Input.is_action_just_pressed(input_swipe_action_name):
+		swipe_flag = swipe_buffer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -145,6 +160,7 @@ func _physics_process(delta: float) -> void:
 	velocity = apply_jump(velocity)
 	velocity = apply_dive(velocity)
 	velocity = apply_dash(velocity)
+	apply_swipe(delta)
 
 	var result = direction * speed
 	result.y = velocity.y
@@ -154,6 +170,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	speed = clamp(speed, 0, velocity.length())
+
+	directional.look_at(directional.global_position + direction, Vector3.UP)
 
 func apply_gravity(veloc: Vector3, delta: float) -> Vector3:
 	if (dash_timer > 0.0):
@@ -240,3 +258,13 @@ func apply_dash(veloc: Vector3) -> Vector3:
 		var move_direction = movement.normalized()
 		direction = move_direction
 	return veloc
+
+func apply_swipe(_delta: float) -> void:
+	if swipe_flag > 0.0 && swipe_timer <= 0.0:
+		swipe_flag = 0.0
+		swipe_timer = swipe_cooldown
+		if swipe_area.has_overlapping_areas():
+			for area in swipe_area.get_overlapping_areas():
+				if area is Hurtbox:
+					(area as Hurtbox).on_hit(self)
+	pass

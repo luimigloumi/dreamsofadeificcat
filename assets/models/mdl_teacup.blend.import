@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c3nf4n5v1qu4q"
-path="res://.godot/imported/mdl_teacup.blend-47ed191fcaa1ef63a13b9b4395dfb011.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/models/mdl_teacup.blend"
-dest_files=["res://.godot/imported/mdl_teacup.blend-47ed191fcaa1ef63a13b9b4395dfb011.scn"]
 
 [params]
 
