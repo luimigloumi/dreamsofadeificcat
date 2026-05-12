@@ -110,7 +110,6 @@ func _ready() -> void:
 	camera_rotator  = get_node(p_camera_rotator)
 
 func _process(delta: float) -> void:
-	print(spring_arm_3D)
 	dive_flag = max(0.0, dive_flag - delta)
 	jump_flag = max(0.0, jump_flag - delta)
 	coyote_flag = max(0.0, coyote_flag - delta)
