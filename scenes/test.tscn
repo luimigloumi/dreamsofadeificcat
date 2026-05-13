@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://bwojhcuioih53" path="res://textures/bricks.tres" id="3_74lek"]
 [ext_resource type="PackedScene" uid="uid://dwjbxj133w7q" path="res://playerretake/player.tscn" id="5_j5jx5"]
 [ext_resource type="Script" uid="uid://cnkw6hcdvch3h" path="res://Scripts/hurtbox.gd" id="6_lpvoh"]
+[ext_resource type="PackedScene" uid="uid://dg6au6610mi3o" path="res://enemy_dummy.tscn" id="7_at5dv"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j5jx5"]
 _surfaces = [{
@@ -468,3 +469,39 @@ mesh = SubResource("BoxMesh_j5jx5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hurtbox guye" unique_id=74087012]
 shape = SubResource("BoxShape3D_lpvoh")
+
+[node name="dummy" parent="." unique_id=1172390594 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0044851, 1, -2.4629402)
+
+[node name="dummy2" parent="." unique_id=1233719069 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.359571, 1.000001, -7.2416124)
+
+[node name="dummy3" parent="." unique_id=67938242 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.981632, 1.000001, -4.365381)
+
+[node name="dummy4" parent="." unique_id=1389657271 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.889677, 1.000001, -5.798202)
+
+[node name="dummy5" parent="." unique_id=978184952 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8483, 1.000001, -5.6274834)
+
+[node name="dummy6" parent="." unique_id=2008561986 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.714222, 1.000001, -3.1597538)
+
+[node name="dummy7" parent="." unique_id=329904782 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.412301, 1.000001, -4.3873215)
+
+[node name="dummy8" parent="." unique_id=1036020718 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.412301, 1.000001, -2.3873215)
+
+[node name="dummy9" parent="." unique_id=202466694 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1554756, 1.000001, -7.2517805)
+
+[node name="dummy10" parent="." unique_id=1885793108 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6916637, 1.000001, -4.7615805)
+
+[node name="dummy11" parent="." unique_id=1192589262 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9599895, 1.000001, -6.7500486)
+
+[node name="dummy12" parent="." unique_id=767963772 instance=ExtResource("7_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9599895, 1.000001, -2.7500486)

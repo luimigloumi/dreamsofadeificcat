@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://dwjbxj133w7q"]
 
 [ext_resource type="Script" uid="uid://bdfc0reo1q4pu" path="res://playerretake/player_retake.gd" id="1_2xyxb"]
-[ext_resource type="PackedScene" uid="uid://dxpmn7dyqr7vk" path="res://assets/models/mc.blend" id="2_40cgn"]
 [ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://playerretake/SpringArmPivot.gd" id="2_g2els"]
-[ext_resource type="Script" uid="uid://dl3lw5pld1tl" path="res://playerretake/debug_label.gd" id="4_40cgn"]
+[ext_resource type="Script" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_40cgn"]
-points = PackedVector3Array(0, 0, 0, 1.5, -0.2, -2, 1.5, 0.2, -2, -1.5, 0.2, -2, -1.5, -0.2, -2)
+points = PackedVector3Array(0, 0, 0, 1.5, -0.5, -2, 1.5, 0.5, -2, -1.5, 0.5, -2, -1.5, -0.5, -2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dqkch"]
 radius = 0.28515625
@@ -40,47 +39,28 @@ material = SubResource("StandardMaterial3D_bnxpk")
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1371874808]
 collision_layer = 2
 script = ExtResource("1_2xyxb")
-input_back_action_name = null
-input_forward_action_name = null
-input_left_action_name = null
-input_right_action_name = null
-input_sprint_action_name = null
-input_jump_action_name = null
-input_crouch_action_name = null
-input_debug_display_action_name = null
-input_dive_action_name = null
-input_dash_action_name = null
-input_swipe_action_name = null
 p_camera_rotator = NodePath("SpringArmPivot")
 p_swipe_area = NodePath("Directional/Area3D")
 p_directional = NodePath("Directional")
-start_speed = null
 walk_speed = 15.0
 run_speed = 30.0
 max_speed = 50.0
 exceed_speed = 70.0
 walk_acceleration = 30.0
-run_acceleration = null
 deceleration = 10.0
 skid_deceleration = 50.0
 turn_deceleration = 2.5
 air_control_mult = 0.2
-air_turn_mult = null
 jump_mult = 2.0
 fall_mult = 3.0
 walk_turn_speed = 14.0
 run_turn_speed = 4.0
-dive_boost = null
 dive_bump = 7.5
 dash_boost = null
-MAX_ZOOM_IN = null
-MAX_ZOOM_OUT = null
 jump_force = 10.0
 jump_buffer = 0.15
 coyote_buffer = 0.2
 dive_buffer = 0.15
-swipe_buffer = null
-swipe_cooldown = null
 
 [node name="Directional" type="Node3D" parent="." unique_id=1303523961]
 
@@ -93,8 +73,6 @@ shape = SubResource("ConvexPolygonShape3D_40cgn")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
-
-[node name="mc" parent="Mesh" unique_id=1696540233 instance=ExtResource("2_40cgn")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=404434453]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.052246094, 0)
