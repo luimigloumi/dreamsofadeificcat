@@ -78,6 +78,7 @@ var dash_timer = 0.2
 var swipe_flag = 0.0
 var swipe_timer = 0.0
 @export var swipe_cooldown = 0.5
+@export var swipe_damage = 1.0
 var charMesh : Node3D
 
 func get_movement_vector() -> Vector3:
@@ -270,5 +271,5 @@ func apply_swipe(_delta: float) -> void:
 		if swipe_area.has_overlapping_areas():
 			for area in swipe_area.get_overlapping_areas():
 				if area is Hurtbox:
-					(area as Hurtbox).on_hit(self)
+					(area as Hurtbox).on_hit(self, swipe_damage)
 	pass

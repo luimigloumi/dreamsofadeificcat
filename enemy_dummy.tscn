@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dg6au6610mi3o"]
+
+[ext_resource type="Script" uid="uid://mcyefl6xg3hd" path="res://enemy_dummy.gd" id="1_33gkd"]
+[ext_resource type="Script" uid="uid://p2rxtxiemyod" path="res://Scripts/hitbox.gd" id="2_1ob5i"]
+[ext_resource type="Script" uid="uid://cnkw6hcdvch3h" path="res://Scripts/hurtbox.gd" id="3_jqwtn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jnamf"]
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1ob5i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t1tt7"]
+radius = 0.7159791
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t4k0o"]
+radius = 0.57662857
+
+[node name="dummy" type="CharacterBody3D" unique_id=1172390594]
+script = ExtResource("1_33gkd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1463718353]
+shape = SubResource("CylinderShape3D_jnamf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=807336855]
+mesh = SubResource("SphereMesh_1ob5i")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1380693196]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_1ob5i")
+debug = true
+metadata/_custom_type_script = "uid://p2rxtxiemyod"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1293277977]
+shape = SubResource("SphereShape3D_t1tt7")
+debug_color = Color(0.8024373, 0, 0.41954222, 0.41960785)
+
+[node name="Hurtbox" type="Area3D" parent="." unique_id=1084344136]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_jqwtn")
+metadata/_custom_type_script = "uid://cnkw6hcdvch3h"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=1779420414]
+shape = SubResource("SphereShape3D_t4k0o")
+
+[connection signal="hurt" from="Hurtbox" to="." method="on_hurt"]
