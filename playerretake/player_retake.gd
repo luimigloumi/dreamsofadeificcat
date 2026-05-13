@@ -78,6 +78,7 @@ var dash_timer = 0.2
 var swipe_flag = 0.0
 var swipe_timer = 0.0
 @export var swipe_cooldown = 0.5
+var charMesh : Node3D
 
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
@@ -120,6 +121,7 @@ func _ready() -> void:
 	camera_rotator  = get_node(p_camera_rotator)
 	swipe_area = get_node(p_swipe_area)
 	directional = get_node(p_directional)
+	charMesh = $Mesh
 
 func _process(delta: float) -> void:
 	dive_flag = max(0.0, dive_flag - delta)
@@ -127,7 +129,9 @@ func _process(delta: float) -> void:
 	coyote_flag = max(0.0, coyote_flag - delta)
 	swipe_flag = max(0.0, swipe_flag - delta)
 	swipe_timer = max(0.0, swipe_timer - delta)
-
+	
+	#charMesh.rotate_y()
+	
 	if Input.is_action_just_pressed(input_debug_display_action_name):
 		debug_display.visible = !debug_display.visible
 	#these two ensure that jumping and diving doesn't not work if you're slightly too early!
