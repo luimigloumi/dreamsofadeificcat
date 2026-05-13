@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dwjbxj133w7q"]
 
 [ext_resource type="Script" uid="uid://bdfc0reo1q4pu" path="res://playerretake/player_retake.gd" id="1_2xyxb"]
+[ext_resource type="PackedScene" uid="uid://cy8ix007rd0r2" path="res://scenes/mc.tscn" id="2_40cgn"]
 [ext_resource type="Script" uid="uid://x7nsogk7hpr5" path="res://playerretake/SpringArmPivot.gd" id="2_g2els"]
 [ext_resource type="Script" path="res://playerretake/debug_label.gd" id="4_40cgn"]
 
@@ -71,6 +72,8 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Directional/Area3D" unique_id=858097187]
 shape = SubResource("ConvexPolygonShape3D_40cgn")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="mc" parent="Directional" unique_id=1696540233 instance=ExtResource("2_40cgn")]
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1607767162]
 

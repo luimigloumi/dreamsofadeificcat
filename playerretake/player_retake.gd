@@ -79,7 +79,6 @@ var swipe_flag = 0.0
 var swipe_timer = 0.0
 @export var swipe_cooldown = 0.5
 @export var swipe_damage = 1.0
-var charMesh : Node3D
 
 func get_movement_vector() -> Vector3:
 	var movement := Input.get_vector(input_left_action_name, input_right_action_name, input_forward_action_name, input_back_action_name)
@@ -122,7 +121,6 @@ func _ready() -> void:
 	camera_rotator  = get_node(p_camera_rotator)
 	swipe_area = get_node(p_swipe_area)
 	directional = get_node(p_directional)
-	charMesh = $Mesh
 
 func _process(delta: float) -> void:
 	dive_flag = max(0.0, dive_flag - delta)
